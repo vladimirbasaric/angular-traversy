@@ -9,6 +9,7 @@ import { UsersComponent } from './components/users/users.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DataService } from './services/data.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,

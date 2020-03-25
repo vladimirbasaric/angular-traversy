@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../../services/data.service'
-
+import { DataService } from '../../services/data.service';
 import { User } from '../../models/User'; 
 
 @Component({
@@ -20,28 +19,22 @@ export class UsersComponent implements OnInit {
   enableAdd: boolean = false;
   showUserForm: boolean = false;
   @ViewChild('userForm') form: any;
+  data: any;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+      this.dataService.getData().subscribe(data => {
+        console.log(data);
+      });
+
    
-      this.users = this.dataService.getUsers();
+      this.dataService.getUsers().subscribe(users => {
+        this.users = users;
+        this.loaded = true;
+      });
 
-      this.loaded = true;
   }
-
-  // addUser() {
-  //   this.user.isActive = true;
-  //   this.user.registered = new Date();
-
-  //   this.users.unshift(this.user);
-
-  //   this.user = {
-  //     firstName: '',
-  //     lastName: '',
-  //     email: ''
-  //   }
-  // }
 
   onSubmit({value, valid}: {value: User, valid: boolean}) {
     if(!valid){
